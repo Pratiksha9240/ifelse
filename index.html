@@ -1,1294 +1,1151 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python If-Else Challenges | Alphagen Learning</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Decision Challenges | Alphagen Learning</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+      :root {
+        --purple: #5e48c4;
+        --dark: #4a3aad;
+        --pale: #eae7fe;
+        --ghost: #f5f4ff;
+        --yellow: #ffd071;
+        --ink: #25243b;
+        --green: #19855a;
+        --red: #c74b57;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 12px;
+        background: #17102d;
+        color: var(--ink);
+        font-family: Poppins, sans-serif;
+      }
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      header {
+        max-width: 1300px;
+        margin: 0 auto 12px;
+        padding: 13px 20px;
+        border-radius: 14px;
+        background: var(--purple);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+      }
+      .logo {
+        background: var(--yellow);
+        color: var(--ink);
+        padding: 9px 13px;
+        border-radius: 9px;
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .brand-name {
+        font-size: 17px;
+        font-weight: 800;
+      }
+      .progress {
+        background: var(--dark);
+        padding: 9px 14px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .progress strong {
+        color: var(--yellow);
+      }
+      .stage {
+        max-width: 1300px;
+        min-height: 700px;
+        margin: auto;
+        background: white;
+        border-radius: 23px;
+        padding: 27px 32px;
+        display: flex;
+        flex-direction: column;
+      }
+      .slide {
+        display: none;
+        flex: 1;
+        flex-direction: column;
+      }
+      .slide.active {
+        display: flex;
+      }
+      .center {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      h1 {
+        font-size: 40px;
+        margin: 15px 0 7px;
+      }
+      h1 span {
+        color: var(--purple);
+      }
+      .subtitle {
+        max-width: 570px;
+        color: #666;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+      .tag {
+        background: var(--ghost);
+        border: 1px solid var(--pale);
+        color: var(--purple);
+        padding: 8px 13px;
+        border-radius: 9px;
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .btn {
+        border: 0;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .btn-purple {
+        background: var(--purple);
+        color: white;
+      }
+      .btn-yellow {
+        background: var(--yellow);
+        color: var(--ink);
+      }
+      .btn-light {
+        background: var(--ghost);
+        color: var(--purple);
+        border: 1px solid var(--pale);
+      }
+      .topline,
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .workspace {
+        display: grid;
+        grid-template-columns: 1.08fr 1fr;
+        gap: 17px;
+        margin: 16px 0;
+        flex: 1;
+      }
+      .panel {
+        min-width: 0;
+        border: 2px solid var(--pale);
+        border-radius: 17px;
+        padding: 17px;
+      }
+      .panel h2 {
+        font-size: 19px;
+        margin: 0 0 7px;
+      }
+      .task {
+        font-size: 12px;
+        line-height: 1.8;
+        color: #4f4d5d;
+        margin: 0 0 13px;
+      }
+      .panel-label {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--purple);
+        text-transform: uppercase;
+        margin-bottom: 9px;
+      }
+      .visual {
+        background: var(--ghost);
+        border: 1px solid var(--pale);
+        border-radius: 14px;
+        padding: 15px;
+        min-height: 365px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+      }
+      .scene-title {
+        color: var(--purple);
+        font-size: 12px;
+        font-weight: 800;
+        text-align: center;
+      }
+      .scene {
+        width: 100%;
+        height: 190px;
+        position: relative;
+        border-radius: 13px;
+        overflow: hidden;
+        background: linear-gradient(#dceaff, #f5faff);
+      }
+      .scene-note {
+        min-height: 22px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--dark);
+        text-align: center;
+      }
+      .result {
+        min-width: 180px;
+        background: #fff2c9;
+        border: 1px solid var(--yellow);
+        border-radius: 11px;
+        padding: 9px 15px;
+        text-align: center;
+      }
+      .result small {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+      }
+      .result strong {
+        display: block;
+        color: var(--purple);
+        font-size: 19px;
+      }
+      .metrics {
+        display: flex;
+        justify-content: center;
+        gap: 9px;
+        flex-wrap: wrap;
+      }
+      .metric {
+        background: white;
+        border: 1px solid var(--pale);
+        border-radius: 9px;
+        padding: 8px 12px;
+        min-width: 100px;
+        text-align: center;
+      }
+      .metric small {
+        display: block;
+        font-size: 10px;
+        color: #666;
+      }
+      .metric strong {
+        display: block;
+        font-size: 17px;
+        color: var(--purple);
+      }
+      .rule-chip {
+        background: #fff1c9;
+        padding: 8px 12px;
+        border-radius: 9px;
+        font-size: 11px;
+        font-weight: 800;
+        text-align: center;
+      }
+      .code-editor {
+        width: 100%;
+        min-height: 280px;
+        resize: vertical;
+        border: 0;
+        outline: 0;
+        background: #10182b;
+        color: #f0f5ff;
+        border-radius: 11px;
+        padding: 15px;
+        font:
+          12px/1.85 "Fira Code",
+          monospace;
+        tab-size: 4;
+      }
+      .input-area {
+        margin-top: 10px;
+        padding: 11px;
+        background: var(--ghost);
+        border: 1px solid var(--pale);
+        border-radius: 10px;
+      }
+      .input-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .input-field label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      .input-field input {
+        width: 100%;
+        border: 1px solid #c6bfe8;
+        border-radius: 8px;
+        padding: 9px;
+        font-size: 12px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 11px;
+      }
+      .output {
+        background: #10182b;
+        color: #e7efff;
+        border-radius: 10px;
+        padding: 12px;
+        margin-top: 11px;
+        min-height: 60px;
+        font:
+          11px/1.7 "Fira Code",
+          monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .feedback {
+        min-height: 22px;
+        margin-top: 9px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .feedback.good {
+        color: var(--green);
+      }
+      .feedback.bad {
+        color: var(--red);
+      }
+      .navigation {
+        max-width: 1300px;
+        margin: 12px auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .nav-btn {
+        background: #291c61;
+        border: 2px solid var(--purple);
+        color: var(--yellow);
+        border-radius: 11px;
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .nav-info {
+        color: white;
+        font-size: 12px;
+      }
+      .finish-score {
+        margin: 22px 0;
+        background: #fff3cc;
+        border: 2px solid var(--yellow);
+        border-radius: 15px;
+        padding: 24px 45px;
+      }
+      .finish-score strong {
+        display: block;
+        font-size: 42px;
+        color: var(--purple);
+      }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+      /* Climbing route */
+      .mountain {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(140deg, #d7c8b7, #b19c90);
+      }
+      .mountain:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          145deg,
+          transparent 0 35px,
+          #846f6630 36px 38px
+        );
+      }
+      .route {
+        position: absolute;
+        bottom: 0;
+        width: 5px;
+        height: 135px;
+        border-left: 5px dashed #fff9;
+        z-index: 1;
+      }
+      .route.easy {
+        left: 25%;
+        transform: rotate(16deg);
+        border-color: #47a875;
+      }
+      .route.medium {
+        left: 50%;
+        border-color: #e8b94a;
+      }
+      .route.hard {
+        left: 75%;
+        transform: rotate(-16deg);
+        border-color: #db6b68;
+      }
+      .route-label {
+        position: absolute;
+        top: 13px;
+        background: white;
+        border-radius: 8px;
+        padding: 5px 9px;
+        font-size: 10px;
+        font-weight: 800;
+        z-index: 2;
+      }
+      .climber {
+        position: absolute;
+        left: 45%;
+        bottom: 8px;
+        font-size: 43px;
+        z-index: 3;
+        transition:
+          left 1.2s,
+          bottom 1.2s;
+      }
+      .climber.move {
+        bottom: 120px;
+      }
 
-<style>
-:root{
-  --purple:#5E48C4;
-  --dark:#4A3AAD;
-  --mid:#7B6ED4;
-  --pale:#EAE7FE;
-  --ghost:#F5F4FF;
-  --yellow:#FFD071;
-  --ink:#25243B;
-  --green:#19855A;
-  --red:#C74B57;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  padding:12px;
-  background:#17102D;
-  color:var(--ink);
-  font-family:Poppins,sans-serif;
-}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.45;cursor:not-allowed}
-header{
-  max-width:1300px;
-  margin:0 auto 12px;
-  padding:13px 20px;
-  border-radius:14px;
-  background:var(--purple);
-  color:white;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-.brand{display:flex;align-items:center;gap:13px}
-.logo{
-  background:var(--yellow);
-  color:var(--ink);
-  padding:9px 13px;
-  border-radius:9px;
-  font-size:11px;
-  font-weight:800;
-}
-.brand-name{font-size:17px;font-weight:800}
-.progress{
-  background:var(--dark);
-  padding:9px 14px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:700;
-}
-.progress strong{color:var(--yellow)}
-.stage{
-  max-width:1300px;
-  min-height:700px;
-  margin:auto;
-  background:white;
-  border-radius:23px;
-  padding:27px 32px;
-  display:flex;
-  flex-direction:column;
-}
-.slide{display:none;flex:1;flex-direction:column}
-.slide.active{display:flex}
-.center{
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-h1{font-size:40px;margin:15px 0 7px}
-h1 span{color:var(--purple)}
-.subtitle{
-  max-width:570px;
-  color:#666;
-  font-size:14px;
-  line-height:1.8;
-}
-.tag{
-  background:var(--ghost);
-  border:1px solid var(--pale);
-  color:var(--purple);
-  padding:8px 13px;
-  border-radius:9px;
-  font-size:11px;
-  font-weight:800;
-}
-.btn{
-  border:0;
-  padding:11px 18px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:800;
-}
-.btn-purple{background:var(--purple);color:white}
-.btn-yellow{background:var(--yellow);color:var(--ink)}
-.btn-light{
-  background:var(--ghost);
-  color:var(--purple);
-  border:1px solid var(--pale);
-}
-.topline,.bottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-.workspace{
-  display:grid;
-  grid-template-columns:1.08fr 1fr;
-  gap:17px;
-  margin:16px 0;
-  flex:1;
-}
-.panel{
-  min-width:0;
-  border:2px solid var(--pale);
-  border-radius:17px;
-  padding:17px;
-}
-.panel h2{font-size:19px;margin:0 0 7px}
-.task{
-  font-size:12px;
-  line-height:1.8;
-  color:#4f4d5d;
-  margin:0 0 13px;
-}
-.panel-label{
-  font-size:11px;
-  font-weight:800;
-  color:var(--purple);
-  text-transform:uppercase;
-  margin-bottom:9px;
-}
-.visual{
-  background:var(--ghost);
-  border:1px solid var(--pale);
-  border-radius:14px;
-  padding:15px;
-  min-height:365px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-}
-.scene-title{
-  color:var(--purple);
-  font-size:12px;
-  font-weight:800;
-  text-align:center;
-}
-.scene{
-  width:100%;
-  height:190px;
-  position:relative;
-  border-radius:13px;
-  overflow:hidden;
-  background:linear-gradient(#dceaff,#f5faff);
-}
-.scene-note{
-  min-height:22px;
-  font-size:12px;
-  font-weight:700;
-  color:var(--dark);
-  text-align:center;
-}
-.result{
-  min-width:180px;
-  background:#FFF2C9;
-  border:1px solid var(--yellow);
-  border-radius:11px;
-  padding:9px 15px;
-  text-align:center;
-}
-.result small{
-  display:block;
-  font-size:10px;
-  font-weight:800;
-}
-.result strong{
-  display:block;
-  color:var(--purple);
-  font-size:19px;
-}
-.metrics{
-  display:flex;
-  justify-content:center;
-  gap:9px;
-  flex-wrap:wrap;
-}
-.metric{
-  background:white;
-  border:1px solid var(--pale);
-  border-radius:9px;
-  padding:8px 12px;
-  min-width:100px;
-  text-align:center;
-}
-.metric small{
-  display:block;
-  font-size:10px;
-  color:#666;
-}
-.metric strong{
-  display:block;
-  font-size:17px;
-  color:var(--purple);
-}
-.rule-chip{
-  background:#FFF1C9;
-  padding:8px 12px;
-  border-radius:9px;
-  font-size:11px;
-  font-weight:800;
-}
-.code-editor{
-  width:100%;
-  min-height:280px;
-  resize:vertical;
-  border:0;
-  outline:0;
-  background:#10182B;
-  color:#F0F5FF;
-  border-radius:11px;
-  padding:15px;
-  font:12px/1.85 "Fira Code",monospace;
-  tab-size:4;
-}
-.input-area{
-  margin-top:10px;
-  padding:11px;
-  background:var(--ghost);
-  border:1px solid var(--pale);
-  border-radius:10px;
-}
-.input-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-}
-.input-field label{
-  display:block;
-  font-size:11px;
-  font-weight:700;
-  margin-bottom:5px;
-}
-.input-field input{
-  width:100%;
-  border:1px solid #c6bfe8;
-  border-radius:8px;
-  padding:9px;
-  font-size:12px;
-}
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:11px;
-}
-.output{
-  background:#10182B;
-  color:#e7efff;
-  border-radius:10px;
-  padding:12px;
-  margin-top:11px;
-  min-height:60px;
-  font:11px/1.7 "Fira Code",monospace;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-}
-.feedback{
-  min-height:22px;
-  margin-top:9px;
-  font-size:11px;
-  font-weight:700;
-}
-.feedback.good{color:var(--green)}
-.feedback.bad{color:var(--red)}
-.navigation{
-  max-width:1300px;
-  margin:12px auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-.nav-btn{
-  background:#291C61;
-  border:2px solid var(--purple);
-  color:var(--yellow);
-  border-radius:11px;
-  padding:10px 20px;
-  font-size:12px;
-  font-weight:800;
-}
-.nav-info{color:white;font-size:12px}
-.finish-score{
-  margin:22px 0;
-  background:#FFF3CC;
-  border:2px solid var(--yellow);
-  border-radius:15px;
-  padding:24px 45px;
-}
-.finish-score strong{
-  display:block;
-  font-size:42px;
-  color:var(--purple);
-}
+      /* Climbing weather */
+      .weather-sky {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(#a9d8ff, #f5faff);
+        transition: background 0.7s;
+      }
+      .weather-sky.rainy {
+        background: linear-gradient(#8c9eb4, #d8e0ec);
+      }
+      .weather-sky.stormy {
+        background: linear-gradient(#525b78, #a4aec2);
+      }
+      .weather-sun {
+        position: absolute;
+        top: 18px;
+        right: 35px;
+        font-size: 53px;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .weather-cloud {
+        position: absolute;
+        top: 18px;
+        left: 32px;
+        font-size: 55px;
+      }
+      .weather-climber {
+        position: absolute;
+        bottom: 12px;
+        left: 46%;
+        font-size: 50px;
+        transition: bottom 1s;
+      }
+      .weather-climber.move {
+        bottom: 95px;
+      }
+      .weather-effect {
+        position: absolute;
+        top: 70px;
+        left: 35%;
+        font-size: 40px;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .weather-effect.visible {
+        opacity: 1;
+      }
 
-/* Rock climbing */
-.rock-wall{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(130deg,#b5a59a,#d5c6b7 55%,#a9958a);
-}
-.rock-wall:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:repeating-linear-gradient(
-    145deg,
-    transparent 0 34px,
-    #8c776d33 35px 37px
-  );
-}
-.hold{
-  position:absolute;
-  width:26px;
-  height:17px;
-  border-radius:50% 40% 45% 40%;
-  background:#E6AA41;
-  border:2px solid #a46d26;
-  transform:rotate(-20deg);
-}
-.climber{
-  position:absolute;
-  bottom:8px;
-  left:44%;
-  z-index:3;
-  font-size:45px;
-  color:var(--purple);
-  transition:bottom 1.2s,left 1.2s;
-  filter:drop-shadow(0 3px 3px #0004);
-}
-.climber.climbing{
-  bottom:118px;
-  left:52%;
-}
-.summit-flag{
-  position:absolute;
-  right:25px;
-  top:10px;
-  z-index:2;
-  font-size:36px;
-  color:var(--purple);
-}
-.route-marker{
-  position:absolute;
-  z-index:2;
-  top:13px;
-  left:12px;
-  background:white;
-  border-radius:8px;
-  padding:7px 10px;
-  font-size:11px;
-  font-weight:800;
-  color:var(--purple);
-}
-.route-path{
-  position:absolute;
-  z-index:1;
-  left:48%;
-  top:23px;
-  height:140px;
-  border-left:4px dashed #fff9;
-}
-.route-indicator{
-  position:absolute;
-  right:10px;
-  bottom:10px;
-  z-index:2;
-  padding:7px 11px;
-  border-radius:9px;
-  background:#fff;
-  font-size:11px;
-  font-weight:800;
-  color:var(--purple);
-}
+      /* Training */
+      .training-scene {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: #e9e6ff;
+      }
+      .training-card {
+        width: 100px;
+        height: 115px;
+        border: 2px solid #b9b0ea;
+        border-radius: 12px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--purple);
+        transition:
+          transform 0.4s,
+          border-color 0.4s;
+      }
+      .training-card span {
+        font-size: 34px;
+      }
+      .training-card.active {
+        transform: translateY(-12px);
+        border-color: var(--green);
+        background: #e9fff3;
+      }
 
-/* Ticket */
-.ticket-scene{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(#e8edff,#f9f6ff);
-}
-.ticket-card{
-  width:260px;
-  background:white;
-  border:2px dashed var(--purple);
-  border-radius:13px;
-  padding:18px;
-  text-align:center;
-}
-.ticket-card i{
-  display:block;
-  color:var(--purple);
-  font-size:40px;
-  margin-bottom:10px;
-}
-.ticket-card strong{
-  display:block;
-  font-size:18px;
-  color:var(--purple);
-}
-.ticket-card small{
-  font-size:11px;
-  color:#666;
-}
-.ticket-card.accepted{
-  border-color:var(--green);
-  animation:pop .5s ease;
-}
-.ticket-card.rejected{
-  border-color:var(--red);
-  animation:shake .4s ease;
-}
+      /* Water station */
+      .station-scene {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        background: #e9f1ff;
+      }
+      .station-person {
+        font-size: 65px;
+      }
+      .station-dispenser {
+        font-size: 75px;
+        transition: transform 0.5s;
+      }
+      .station-dispenser.active {
+        transform: scale(1.12);
+      }
+      .station-status {
+        position: absolute;
+        bottom: 12px;
+        background: white;
+        border-radius: 9px;
+        padding: 7px 12px;
+        font-size: 11px;
+        font-weight: 800;
+      }
 
-/* Arcade */
-.arcade-scene{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:25px;
-}
-.arcade-person{
-  font-size:67px;
-  color:var(--purple);
-}
-.arcade-gate{
-  position:relative;
-  width:115px;
-  height:135px;
-  border:6px solid var(--dark);
-  border-bottom:0;
-  border-radius:13px 13px 0 0;
-  overflow:hidden;
-  background:#fff;
-}
-.arcade-door{
-  position:absolute;
-  inset:0;
-  background:var(--purple);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:36px;
-  transition:transform .9s ease;
-}
-.arcade-door.open{transform:translateX(-110%)}
+      /* Camp entry */
+      .camp-scene {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: linear-gradient(#d8ebff, #ecf6e7);
+      }
+      .camp-person {
+        font-size: 58px;
+      }
+      .camp-gate {
+        width: 115px;
+        height: 125px;
+        border: 6px solid var(--dark);
+        border-bottom: 0;
+        border-radius: 12px 12px 0 0;
+        position: relative;
+        overflow: hidden;
+        background: #fff;
+      }
+      .camp-door {
+        position: absolute;
+        inset: 0;
+        background: var(--purple);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        transition: transform 0.8s;
+      }
+      .camp-door.open {
+        transform: translateX(-110%);
+      }
 
-/* Receipt */
-.shopping-scene{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#ede9ff;
-}
-.receipt{
-  width:265px;
-  background:white;
-  border:2px dashed var(--purple);
-  border-radius:11px;
-  padding:15px;
-  font-size:12px;
-}
-.receipt-title{
-  font-weight:800;
-  color:var(--purple);
-  text-align:center;
-  padding-bottom:9px;
-  border-bottom:1px dashed #bbb;
-}
-.receipt-line{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:10px;
-}
-.receipt-line.total{
-  padding-top:9px;
-  border-top:1px dashed #bbb;
-  font-weight:800;
-  color:var(--purple);
-}
+      @media (max-width: 900px) {
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+        .stage {
+          padding: 20px;
+        }
+      }
+      @media (max-width: 500px) {
+        h1 {
+          font-size: 30px;
+        }
+        .brand-name {
+          font-size: 13px;
+        }
+        .nav-info {
+          display: none;
+        }
+        .panel {
+          padding: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="logo">ALPHAGEN LEARNING</span>
+        <span class="brand-name">Python Decision Challenges</span>
+      </div>
+      <div class="progress">
+        Completed: <strong id="progress">0</strong> / 5
+      </div>
+    </header>
 
-/* Delivery */
-.delivery-scene{
-  background:linear-gradient(#dceaff 74%,#e2e0e8 74%);
-}
-.delivery-road{
-  position:absolute;
-  bottom:12px;
-  width:100%;
-  border-bottom:3px dashed #aaa;
-}
-.bike{
-  position:absolute;
-  left:3%;
-  bottom:20px;
-  font-size:47px;
-  color:var(--purple);
-  transition:left 1.7s ease;
-}
-.bike.arrived{left:73%}
-.house{
-  position:absolute;
-  right:8%;
-  bottom:22px;
-  font-size:50px;
-  color:#675b9d;
-}
-.delivery-label{
-  position:absolute;
-  top:15px;
-  left:15px;
-  padding:8px 12px;
-  border-radius:9px;
-  background:white;
-  color:var(--purple);
-  font-size:12px;
-  font-weight:800;
-}
-
-@keyframes pop{
-  from{transform:scale(.75);opacity:.4}
-  to{transform:scale(1);opacity:1}
-}
-@keyframes shake{
-  25%{transform:translateX(-6px)}
-  50%{transform:translateX(6px)}
-  75%{transform:translateX(-4px)}
-}
-@media(max-width:900px){
-  .workspace{grid-template-columns:1fr}
-  .stage{padding:20px}
-}
-@media(max-width:500px){
-  h1{font-size:30px}
-  .brand-name{font-size:13px}
-  .nav-info{display:none}
-  .panel{padding:13px}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="brand">
-    <span class="logo">ALPHAGEN LEARNING</span>
-    <span class="brand-name">Python If-Else Challenges</span>
-  </div>
-  <div class="progress">
-    <i class="fa-solid fa-star" style="color:#FFD071"></i>
-    Completed: <strong id="progress">0</strong> / 5
-  </div>
-</header>
-
-<main class="stage">
-
-<section id="intro" class="slide active center">
-  <span class="tag">PYTHON DECISION MAKING</span>
-  <h1>Make the <span>Right Decision!</span></h1>
-  <p class="subtitle">
-    Five real-life Python challenges.
-    Write if-else code, run it, and watch your decisions come to life.
-  </p>
-  <div style="font-size:66px;margin:24px 0;color:#5E48C4">
-    <i class="fa-solid fa-mountain-sun"></i>
-  </div>
-  <button class="btn btn-yellow" onclick="start()">
-    Start Challenges <i class="fa-solid fa-arrow-right"></i>
-  </button>
-</section>
-
-<section id="challenge" class="slide">
-  <div class="topline">
-    <span class="tag" id="counter"></span>
-    <span class="tag" id="topic"></span>
-  </div>
-
-  <div class="workspace">
-    <div class="panel">
-      <h2 id="challengeTitle"></h2>
-      <p class="task" id="task"></p>
-
-      <div class="panel-label">Your Program's Animation</div>
-      <div class="visual" id="visual"></div>
-
-      <div class="actions">
-        <button class="btn btn-light" onclick="replayAnimation()">
-          <i class="fa-solid fa-rotate-right"></i> Replay Animation
+    <main class="stage">
+      <section id="intro" class="slide active center">
+        <span class="tag">IF-ELIF-ELSE + LOGICAL OPERATORS</span>
+        <h1>Choose Your <span>Next Move!</span></h1>
+        <p class="subtitle">
+          Five real-life coding challenges. Write Python, test your decisions,
+          and watch the animations respond to your program.
+        </p>
+        <div style="font-size: 70px; margin: 22px 0">🧗</div>
+        <button class="btn btn-yellow" onclick="start()">
+          Start Challenges →
         </button>
-      </div>
-    </div>
+      </section>
 
-    <div class="panel">
-      <div class="panel-label">Write Your Python Code</div>
-      <textarea id="editor" class="code-editor"
-        spellcheck="false" autocomplete="off"></textarea>
-
-      <div class="input-area">
-        <div class="input-grid" id="inputGrid"></div>
-      </div>
-
-      <div class="actions">
-        <button class="btn btn-purple" id="runBtn" onclick="runCode()">
-          <i class="fa-solid fa-play"></i> Run Code
-        </button>
-        <button class="btn btn-light" onclick="resetCode()">
-          <i class="fa-solid fa-rotate-right"></i> Reset
-        </button>
-      </div>
-
-      <div class="output" id="output">
-        Output will appear here...
-      </div>
-      <div class="feedback" id="feedback"></div>
-    </div>
-  </div>
-
-  <div class="bottom">
-    <span class="tag">Use if-else to solve the challenge</span>
-    <button class="btn btn-purple" id="nextChallenge"
-      onclick="nextChallenge()" disabled>
-      Next Challenge
-    </button>
-  </div>
-</section>
-
-<section id="finish" class="slide center">
-  <span class="tag">ALL CHALLENGES COMPLETED</span>
-  <h1>Decision <span>Master!</span></h1>
-  <div class="finish-score">
-    <div style="font-size:12px;font-weight:800">
-      CHALLENGES SOLVED
-    </div>
-    <strong id="finalCount">5 / 5</strong>
-  </div>
-  <button class="btn btn-yellow" onclick="restart()">
-    Try Again <i class="fa-solid fa-rotate-right"></i>
-  </button>
-</section>
-
-</main>
-
-<div class="navigation">
-  <button class="nav-btn" id="prevBtn" onclick="previous()" disabled>
-    <i class="fa-solid fa-arrow-left"></i> Previous
-  </button>
-  <span class="nav-info" id="navInfo">Python If-Else</span>
-  <button class="nav-btn" id="navNext" onclick="forward()">
-    Next <i class="fa-solid fa-arrow-right"></i>
-  </button>
-</div>
-
-<script>
-"use strict";
-
-const $=id=>document.getElementById(id);
-
-const challenges=[
-  {
-    title:"Rock Climbing: Choose Your Route",
-    topic:"Simple if-else",
-    task:"A climbing centre has two routes. Climbers with experience of 2 years or more can take the Advanced Route. Others take the Beginner Route. Ask for years of experience and print exactly 'Advanced Route' or 'Beginner Route'.",
-    starter:`experience = int(input("Years of climbing experience: "))
-
-# Use if-else to choose the climbing route
-`,
-    inputs:[
-      {label:"Years of experience",value:"3",type:"number"}
-    ],
-    tests:[
-      ["3"],
-      ["1"],
-      ["2"],
-      ["0"]
-    ],
-    expected:v=>Number(v[0])>=2
-      ?"Advanced Route":"Beginner Route"
-  },
-  {
-    title:"Rock Climbing: Reach the Summit",
-    topic:"Comparison operators",
-    task:"A climbing wall is 12 metres high. Ask how many metres the climber has completed. If the climber has reached 12 metres or more, print 'Summit reached'. Otherwise, print 'Keep climbing'.",
-    starter:`height = float(input("Height climbed in metres: "))
-
-# Check whether the climber reached the summit
-`,
-    inputs:[
-      {label:"Height climbed (metres)",value:"12",type:"number"}
-    ],
-    tests:[
-      ["12"],
-      ["8"],
-      ["15"],
-      ["11.5"]
-    ],
-    expected:v=>Number(v[0])>=12
-      ?"Summit reached":"Keep climbing"
-  },
-  {
-    title:"Adventure Park Entry",
-    topic:"Eligibility check",
-    task:"An adventure park allows children aged 12 or above to enter the gaming zone. Ask for the visitor's age. Print 'Entry allowed' if eligible. Otherwise, print 'Entry denied'.",
-    starter:`age = int(input("Visitor age: "))
-
-# Check whether the visitor can enter
-`,
-    inputs:[
-      {label:"Visitor age",value:"14",type:"number"}
-    ],
-    tests:[
-      ["14"],
-      ["10"],
-      ["12"],
-      ["8"]
-    ],
-    expected:v=>Number(v[0])>=12
-      ?"Entry allowed":"Entry denied"
-  },
-  {
-    title:"Adventure Store Discount",
-    topic:"If-else with calculations",
-    task:"An adventure store offers 20% off purchases of ₹1000 or more. Otherwise, there is no discount. Ask for the bill amount and print the final amount to pay.",
-    starter:`bill = float(input("Enter bill amount: "))
-
-# Calculate the final amount using if-else
-`,
-    inputs:[
-      {label:"Bill amount (₹)",value:"1500",type:"number"}
-    ],
-    tests:[
-      ["1500"],
-      ["800"],
-      ["1000"],
-      ["1200"]
-    ],
-    expected:v=>{
-      const bill=Number(v[0]);
-      return bill>=1000?bill*.8:bill;
-    }
-  },
-  {
-    title:"Food Delivery After Training",
-    topic:"Real-life calculation",
-    task:"After training, a climber orders food. Delivery is free for orders of ₹500 or more. Otherwise, a ₹40 delivery fee is added. Ask for the order amount and print the final payable amount.",
-    starter:`order = float(input("Enter order amount: "))
-
-# Calculate the final cost using if-else
-`,
-    inputs:[
-      {label:"Order amount (₹)",value:"450",type:"number"}
-    ],
-    tests:[
-      ["450"],
-      ["600"],
-      ["500"],
-      ["300"]
-    ],
-    expected:v=>{
-      const order=Number(v[0]);
-      return order+(order>=500?0:40);
-    }
-  }
-];
-
-let current=-1;
-let completed=new Set();
-let savedCode={};
-let lastRun={};
-let running=false;
-let worker=null;
-let requests=new Map();
-let requestId=0;
-let timers=[];
-let animationToken=0;
-
-function schedule(fn,delay){
-  const token=animationToken;
-  const id=setTimeout(()=>{
-    if(token===animationToken)fn();
-  },delay);
-  timers.push(id);
-}
-
-function clearAnimation(){
-  animationToken++;
-  timers.forEach(clearTimeout);
-  timers=[];
-}
-
-function show(id){
-  document.querySelectorAll(".slide").forEach(el=>{
-    el.classList.remove("active");
-  });
-  $(id).classList.add("active");
-  updateNav();
-}
-
-function start(){
-  current=0;
-  render();
-}
-
-function note(text){
-  const el=$("sceneNote");
-  if(el)el.textContent=text;
-}
-
-function result(text){
-  const el=$("sceneResult");
-  if(el)el.textContent=text;
-}
-
-function metric(label,value,id=""){
-  return `
-    <div class="metric">
-      <small>${label}</small>
-      <strong ${id?`id="${id}"`:""}>${value}</strong>
-    </div>
-  `;
-}
-
-function sceneTemplate(title,scene,extra=""){
-  return `
-    <div class="scene-title">${title}</div>
-    ${extra}
-    <div class="scene">${scene}</div>
-    <div class="scene-note" id="sceneNote">
-      Run your code to see the animation.
-    </div>
-    <div class="result">
-      <small>YOUR PROGRAM'S OUTPUT</small>
-      <strong id="sceneResult">Waiting...</strong>
-    </div>
-  `;
-}
-
-function buildVisual(){
-  const visual=$("visual");
-
-  if(current===0){
-    visual.innerHTML=sceneTemplate(
-      "CHOOSE YOUR CLIMBING ROUTE",
-      `
-      <div class="rock-wall">
-        <div class="route-path"></div>
-        <div class="hold" style="left:32%;top:120px"></div>
-        <div class="hold" style="left:54%;top:100px"></div>
-        <div class="hold" style="left:38%;top:70px"></div>
-        <div class="hold" style="left:63%;top:40px"></div>
-        <i class="fa-solid fa-flag summit-flag"></i>
-        <i class="fa-solid fa-person-hiking climber"
-           id="climber"></i>
-        <div class="route-marker" id="routeMarker">
-          Route not selected
+      <section id="challenge" class="slide">
+        <div class="topline">
+          <span class="tag" id="counter"></span>
+          <span class="tag" id="topic"></span>
         </div>
-      </div>
-      `,
-      `<div class="metrics">
-        ${metric("Experience","—","experienceMetric")}
-      </div>`
-    );
-  }
-
-  if(current===1){
-    visual.innerHTML=sceneTemplate(
-      "CLIMB TO THE SUMMIT",
-      `
-      <div class="rock-wall">
-        <div class="route-path"></div>
-        <div class="hold" style="left:37%;top:125px"></div>
-        <div class="hold" style="left:59%;top:103px"></div>
-        <div class="hold" style="left:43%;top:78px"></div>
-        <div class="hold" style="left:61%;top:46px"></div>
-        <i class="fa-solid fa-flag summit-flag"></i>
-        <i class="fa-solid fa-person-hiking climber"
-           id="climber"></i>
-        <div class="route-indicator" id="heightIndicator">
-          0 / 12 m
-        </div>
-      </div>
-      `,
-      `<div class="metrics">
-        ${metric("Summit height","12 m")}
-        ${metric("Height climbed","—","heightMetric")}
-      </div>`
-    );
-  }
-
-  if(current===2){
-    visual.innerHTML=sceneTemplate(
-      "ADVENTURE PARK ENTRY",
-      `
-      <div class="arcade-scene">
-        <i class="fa-solid fa-child-reaching arcade-person"></i>
-        <div class="arcade-gate">
-          <div class="arcade-door" id="arcadeDoor">
-            <i class="fa-solid fa-lock"></i>
+        <div class="workspace">
+          <div class="panel">
+            <h2 id="challengeTitle"></h2>
+            <p class="task" id="task"></p>
+            <div class="panel-label">Your Program's Animation</div>
+            <div class="visual" id="visual"></div>
+            <div class="actions">
+              <button class="btn btn-light" onclick="replayAnimation()">
+                ↻ Replay Animation
+              </button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-label">Write Your Python Code</div>
+            <textarea
+              id="editor"
+              class="code-editor"
+              spellcheck="false"
+              autocomplete="off"
+            ></textarea>
+            <div class="input-area">
+              <div class="input-grid" id="inputGrid"></div>
+            </div>
+            <div class="actions">
+              <button class="btn btn-purple" id="runBtn" onclick="runCode()">
+                ▶ Run Code
+              </button>
+              <button class="btn btn-light" onclick="resetCode()">
+                ↻ Reset
+              </button>
+            </div>
+            <div class="output" id="output">Output will appear here...</div>
+            <div class="feedback" id="feedback"></div>
           </div>
         </div>
-      </div>
-      `,
-      `<div class="metrics">
-        ${metric("Minimum age","12")}
-        ${metric("Visitor age","—","ageMetric")}
-      </div>`
-    );
-  }
-
-  if(current===3){
-    visual.innerHTML=sceneTemplate(
-      "ADVENTURE STORE CHECKOUT",
-      `
-      <div class="shopping-scene">
-        <div class="receipt" id="receipt">
-          <div class="receipt-title">
-            <i class="fa-solid fa-bag-shopping"></i>
-            ADVENTURE STORE
-          </div>
-          <div class="receipt-line">
-            <span>Original bill</span>
-            <b id="billValue">—</b>
-          </div>
-          <div class="receipt-line">
-            <span>Discount</span>
-            <b id="discountValue">—</b>
-          </div>
-          <div class="receipt-line total">
-            <span>Amount to pay</span>
-            <b id="totalValue">—</b>
-          </div>
+        <div class="bottom">
+          <span class="tag" id="conceptTag"></span>
+          <button
+            class="btn btn-purple"
+            id="nextChallenge"
+            onclick="nextChallenge()"
+            disabled
+          >
+            Next Challenge
+          </button>
         </div>
-      </div>
-      `,
-      `<div class="rule-chip">
-        20% OFF when bill ≥ ₹1000
-      </div>`
-    );
-  }
+      </section>
 
-  if(current===4){
-    visual.innerHTML=sceneTemplate(
-      "FOOD DELIVERY",
-      `
-      <div class="delivery-scene">
-        <div class="delivery-road"></div>
-        <div class="delivery-label" id="deliveryLabel">
-          Waiting for order
+      <section id="finish" class="slide center">
+        <span class="tag">ALL CHALLENGES COMPLETED</span>
+        <h1>Decision <span>Master!</span></h1>
+        <div class="finish-score">
+          CHALLENGES SOLVED
+          <strong id="finalCount">5 / 5</strong>
         </div>
-        <i class="fa-solid fa-motorcycle bike" id="bike"></i>
-        <i class="fa-solid fa-house house"></i>
-      </div>
-      `,
-      `<div class="metrics">
-        ${metric("Order amount","—","orderMetric")}
-        ${metric("Delivery fee","—","feeMetric")}
-      </div>`
-    );
-  }
-}
+        <button class="btn btn-yellow" onclick="restart()">Try Again ↻</button>
+      </section>
+    </main>
 
-function renderInputs(){
-  const grid=$("inputGrid");
-  grid.replaceChildren();
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" onclick="previous()" disabled>
+        ← Previous
+      </button>
+      <span class="nav-info" id="navInfo">Python Decisions</span>
+      <button class="nav-btn" id="navNext" onclick="forward()">Next →</button>
+    </div>
 
-  challenges[current].inputs.forEach((item,i)=>{
-    const wrap=document.createElement("div");
-    wrap.className="input-field";
+    <script>
+      "use strict";
+      const $ = (id) => document.getElementById(id);
 
-    const label=document.createElement("label");
-    label.htmlFor=`userInput${i}`;
-    label.textContent=item.label;
+      const challenges = [
+        {
+          title: "Rock Climbing: Choose Your Route",
+          topic: "if-elif-else",
+          task: "A climbing centre offers three routes. If experience is less than 2 years, print 'Beginner Route'. If experience is less than 5 years, print 'Intermediate Route'. Otherwise, print 'Advanced Route'.",
+          starter: `experience = int(input("Years of experience: "))
 
-    const input=document.createElement("input");
-    input.id=`userInput${i}`;
-    input.type=item.type;
-    input.step="any";
-    input.value=item.value;
+# Use if, elif and else to select a route
+`,
+          inputs: [
+            { label: "Years of experience", value: "3", type: "number" },
+          ],
+          tests: [["0"], ["1"], ["2"], ["4"], ["5"], ["8"]],
+          expected: (v) => {
+            const n = Number(v[0]);
+            return n < 2
+              ? "Beginner Route"
+              : n < 5
+                ? "Intermediate Route"
+                : "Advanced Route";
+          },
+          concept: "Three possible decisions",
+          operator: "elif",
+        },
+        {
+          title: "Rock Climbing: Weather Decision",
+          topic: "if-elif-else",
+          task: "A climbing instructor checks the weather. If it is 'stormy', print 'Climb cancelled'. If it is 'rainy', print 'Indoor climbing'. Otherwise, print 'Outdoor climbing'.",
+          starter: `weather = input("Weather: ").lower()
 
-    wrap.append(label,input);
-    grid.append(wrap);
-  });
-}
+# Use if, elif and else to decide the activity
+`,
+          inputs: [
+            {
+              label: "Weather (sunny/rainy/stormy)",
+              value: "sunny",
+              type: "text",
+            },
+          ],
+          tests: [["sunny"], ["rainy"], ["stormy"], ["cloudy"]],
+          expected: (v) => {
+            const w = v[0].toLowerCase();
+            return w === "stormy"
+              ? "Climb cancelled"
+              : w === "rainy"
+                ? "Indoor climbing"
+                : "Outdoor climbing";
+          },
+          concept: "Choose based on weather",
+          operator: "elif",
+        },
+        {
+          title: "Adventure Training Level",
+          topic: "if-elif-else",
+          task: "A coach awards a training level based on points. If points are 80 or more, print 'Gold'. If points are 50 or more, print 'Silver'. Otherwise, print 'Bronze'.",
+          starter: `points = int(input("Training points: "))
 
-function getValues(){
-  return challenges[current].inputs.map(
-    (_,i)=>$(`userInput${i}`).value.trim()
-  );
-}
+# Use if, elif and else to award a level
+`,
+          inputs: [{ label: "Training points", value: "65", type: "number" }],
+          tests: [["20"], ["50"], ["79"], ["80"], ["100"]],
+          expected: (v) => {
+            const p = Number(v[0]);
+            return p >= 80 ? "Gold" : p >= 50 ? "Silver" : "Bronze";
+          },
+          concept: "Check conditions in order",
+          operator: "elif",
+        },
+        {
+          title: "Climbing Camp Entry",
+          topic: "Logical operator: and",
+          task: "A climbing camp requires visitors to be at least 12 years old AND have parent permission ('yes'). Ask for both values. Print 'Entry allowed' only when both conditions are true. Otherwise, print 'Entry denied'.",
+          starter: `age = int(input("Age: "))
+permission = input("Parent permission (yes/no): ").lower()
 
-function money(n){
-  return "₹"+Number(n).toFixed(2);
-}
+# Use AND to check both requirements
+`,
+          inputs: [
+            { label: "Age", value: "14", type: "number" },
+            { label: "Parent permission (yes/no)", value: "yes", type: "text" },
+          ],
+          tests: [
+            ["14", "yes"],
+            ["10", "yes"],
+            ["15", "no"],
+            ["12", "yes"],
+            ["12", "no"],
+          ],
+          expected: (v) =>
+            Number(v[0]) >= 12 && v[1].toLowerCase() === "yes"
+              ? "Entry allowed"
+              : "Entry denied",
+          concept: "Both conditions must be true",
+          operator: "and",
+        },
+        {
+          title: "Adventure Park Water Station",
+          topic: "Logical operator: or",
+          task: "A water station gives a free water bottle if the visitor is a member OR has a coupon. Ask for both answers ('yes' or 'no'). Print 'Free water' when at least one condition is true. Otherwise, print 'Pay for water'.",
+          starter: `member = input("Are you a member? ").lower()
+coupon = input("Do you have a coupon? ").lower()
 
-function render(){
-  clearAnimation();
+# Use OR to check either requirement
+`,
+          inputs: [
+            { label: "Member? (yes/no)", value: "no", type: "text" },
+            { label: "Coupon? (yes/no)", value: "yes", type: "text" },
+          ],
+          tests: [
+            ["yes", "no"],
+            ["no", "yes"],
+            ["yes", "yes"],
+            ["no", "no"],
+          ],
+          expected: (v) =>
+            v[0].toLowerCase() === "yes" || v[1].toLowerCase() === "yes"
+              ? "Free water"
+              : "Pay for water",
+          concept: "At least one condition must be true",
+          operator: "or",
+        },
+      ];
 
-  if(current<0){
-    show("intro");
-    return;
-  }
+      let current = -1;
+      let completed = new Set();
+      let savedCode = {};
+      let lastRun = {};
+      let running = false;
+      let worker = null;
+      let requests = new Map();
+      let requestId = 0;
+      let timers = [];
+      let animationToken = 0;
 
-  if(current>=5){
-    showFinish();
-    return;
-  }
-
-  const c=challenges[current];
-
-  $("counter").textContent=`Challenge ${current+1} of 5`;
-  $("topic").textContent=c.topic;
-  $("challengeTitle").textContent=c.title;
-  $("task").textContent=c.task;
-  $("editor").value=savedCode[current]??c.starter;
-  $("output").textContent="Output will appear here...";
-  $("feedback").textContent="";
-  $("feedback").className="feedback";
-  $("nextChallenge").disabled=!completed.has(current);
-  $("nextChallenge").textContent=
-    current===4?"Finish Challenges":"Next Challenge";
-
-  renderInputs();
-  show("challenge");
-  buildVisual();
-}
-
-function resetCode(){
-  if(running||current<0||current>=5)return;
-
-  $("editor").value=challenges[current].starter;
-  savedCode[current]=$("editor").value;
-  delete lastRun[current];
-
-  $("output").textContent="Output will appear here...";
-  $("feedback").textContent="";
-  $("feedback").className="feedback";
-
-  clearAnimation();
-  buildVisual();
-}
-
-function parseOutput(index,raw){
-  const text=String(raw).trim();
-
-  if(index<=2){
-    return {
-      text,
-      recognized:
-        index===0
-          ?["Advanced Route","Beginner Route"].includes(text)
-          :index===1
-            ?["Summit reached","Keep climbing"].includes(text)
-            :["Entry allowed","Entry denied"].includes(text)
-    };
-  }
-
-  const cleaned=text.replace(/^₹/,"");
-  const number=Number(cleaned);
-
-  return {
-    text,
-    number,
-    recognized:
-      text!==""&&
-      !/\s/.test(cleaned)&&
-      Number.isFinite(number)
-  };
-}
-
-/*
-  The animation uses the student's actual Python output.
-  It does not use the expected answer to choose a result.
-*/
-function animateExecution(record){
-  clearAnimation();
-  buildVisual();
-
-  if(!record){
-    note("Run your code first.");
-    return;
-  }
-
-  const index=current;
-  const input=Number(record.values[0]);
-  const parsed=parseOutput(index,record.output);
-
-  if(record.error){
-    result("Code error");
-    note("Your program could not finish.");
-    return;
-  }
-
-  if(index===0){
-    $("experienceMetric").textContent=
-      input+" years";
-
-    note("Checking your program's route decision...");
-
-    schedule(()=>{
-      result(parsed.text||"No output");
-
-      if(parsed.text==="Advanced Route"){
-        $("routeMarker").textContent="Advanced Route";
-        $("climber").classList.add("climbing");
-        note("Your code selected the advanced climbing route.");
-      }else if(parsed.text==="Beginner Route"){
-        $("routeMarker").textContent="Beginner Route";
-        $("climber").style.bottom="65px";
-        note("Your code selected the beginner climbing route.");
-      }else{
-        note("Your code did not print a recognized route.");
+      function schedule(fn, delay) {
+        const token = animationToken;
+        timers.push(
+          setTimeout(() => {
+            if (token === animationToken) fn();
+          }, delay),
+        );
       }
-    },800);
-  }
-
-  if(index===1){
-    $("heightMetric").textContent=input+" m";
-
-    const fraction=Math.max(0,Math.min(input/12,1));
-    const targetBottom=8+fraction*110;
-
-    note("Climber is moving up the wall...");
-
-    schedule(()=>{
-      $("climber").style.bottom=targetBottom+"px";
-      $("heightIndicator").textContent=
-        `${input} / 12 m`;
-    },350);
-
-    schedule(()=>{
-      result(parsed.text||"No output");
-
-      if(parsed.text==="Summit reached"){
-        note("Your code says the summit was reached!");
-      }else if(parsed.text==="Keep climbing"){
-        note("Your code says to keep climbing.");
-      }else{
-        note("Your code did not print a recognized status.");
+      function clearAnimation() {
+        animationToken++;
+        timers.forEach(clearTimeout);
+        timers = [];
       }
-    },1700);
-  }
-
-  if(index===2){
-    $("ageMetric").textContent=input;
-
-    note("Checking your program's entry decision...");
-
-    schedule(()=>{
-      result(parsed.text||"No output");
-
-      if(parsed.text==="Entry allowed"){
-        $("arcadeDoor").classList.add("open");
-        note("Your code opened the adventure park gate.");
-      }else if(parsed.text==="Entry denied"){
-        note("Your code kept the gate closed.");
-      }else{
-        note("Your code did not print a recognized decision.");
+      function show(id) {
+        document
+          .querySelectorAll(".slide")
+          .forEach((el) => el.classList.remove("active"));
+        $(id).classList.add("active");
+        updateNav();
       }
-    },900);
-  }
-
-  if(index===3){
-    $("billValue").textContent=money(input);
-
-    note("Reading the final amount printed by your code...");
-
-    schedule(()=>{
-      if(!parsed.recognized){
-        result(parsed.text||"No output");
-        note("Print one numeric final amount.");
-        return;
+      function start() {
+        current = 0;
+        render();
+      }
+      function note(text) {
+        const el = $("sceneNote");
+        if (el) el.textContent = text;
+      }
+      function result(text) {
+        const el = $("sceneResult");
+        if (el) el.textContent = text;
+      }
+      function metric(label, value, id = "") {
+        return `<div class="metric"><small>${label}</small><strong ${id ? `id="${id}"` : ""}>${value}</strong></div>`;
+      }
+      function sceneTemplate(title, scene, extra = "") {
+        return `<div class="scene-title">${title}</div>${extra}<div class="scene">${scene}</div>
+  <div class="scene-note" id="sceneNote">Run your code to see the animation.</div>
+  <div class="result"><small>YOUR PROGRAM'S OUTPUT</small><strong id="sceneResult">Waiting...</strong></div>`;
       }
 
-      const discount=input-parsed.number;
-
-      $("discountValue").textContent=money(discount);
-      $("totalValue").textContent=money(parsed.number);
-      result(money(parsed.number));
-
-      $("receipt").style.animation="pop .5s ease";
-
-      note("The receipt shows your program's calculation.");
-    },900);
-  }
-
-  if(index===4){
-    $("orderMetric").textContent=money(input);
-
-    note("Calculating delivery from your program's output...");
-
-    schedule(()=>{
-      if(!parsed.recognized){
-        result(parsed.text||"No output");
-        note("Print one numeric final amount.");
-        return;
+      function buildVisual() {
+        const visual = $("visual");
+        if (current === 0) {
+          visual.innerHTML = sceneTemplate(
+            "SELECT A CLIMBING ROUTE",
+            `
+      <div class="mountain">
+        <div class="route easy"></div><div class="route medium"></div><div class="route hard"></div>
+        <span class="route-label" style="left:7%">Beginner</span>
+        <span class="route-label" style="left:38%">Intermediate</span>
+        <span class="route-label" style="right:6%">Advanced</span>
+        <div class="climber" id="climber">🧗</div>
+      </div>`,
+            `<div class="metrics">${metric("Experience", "—", "experienceMetric")}</div>`,
+          );
+        }
+        if (current === 1) {
+          visual.innerHTML = sceneTemplate(
+            "WEATHER AT THE CLIMBING WALL",
+            `
+      <div class="weather-sky" id="weatherSky">
+        <div class="weather-sun" id="weatherSun">☀️</div>
+        <div class="weather-cloud">☁️</div>
+        <div class="weather-effect" id="weatherEffect">🌧️</div>
+        <div class="weather-climber" id="weatherClimber">🧗</div>
+      </div>`,
+            `<div class="metrics">${metric("Weather", "—", "weatherMetric")}</div>`,
+          );
+        }
+        if (current === 2) {
+          visual.innerHTML = sceneTemplate(
+            "TRAINING REWARD",
+            `
+      <div class="training-scene">
+        <div class="training-card" id="bronzeCard"><span>🥉</span>Bronze</div>
+        <div class="training-card" id="silverCard"><span>🥈</span>Silver</div>
+        <div class="training-card" id="goldCard"><span>🥇</span>Gold</div>
+      </div>`,
+            `<div class="metrics">${metric("Points", "—", "pointsMetric")}</div>`,
+          );
+        }
+        if (current === 3) {
+          visual.innerHTML = sceneTemplate(
+            "CLIMBING CAMP CHECK-IN",
+            `
+      <div class="camp-scene">
+        <div class="camp-person">🧍</div>
+        <div class="camp-gate">
+          <div class="camp-door" id="campDoor">🔒</div>
+        </div>
+      </div>`,
+            `<div class="metrics">
+        ${metric("Age", "—", "ageMetric")}
+        ${metric("Permission", "—", "permissionMetric")}
+      </div>`,
+          );
+        }
+        if (current === 4) {
+          visual.innerHTML = sceneTemplate(
+            "WATER STATION",
+            `
+      <div class="station-scene">
+        <div class="station-person">🧍</div>
+        <div class="station-dispenser" id="dispenser">🚰</div>
+        <div class="station-status" id="stationStatus">Waiting...</div>
+      </div>`,
+            `<div class="metrics">
+        ${metric("Member", "—", "memberMetric")}
+        ${metric("Coupon", "—", "couponMetric")}
+      </div>`,
+          );
+        }
       }
 
-      const fee=parsed.number-input;
-
-      $("feeMetric").textContent=money(fee);
-      $("deliveryLabel").textContent=
-        `Total: ${money(parsed.number)}`;
-
-      result(money(parsed.number));
-
-      $("bike").classList.add("arrived");
-      note("The delivery bike is on its way!");
-    },700);
-
-    schedule(()=>{
-      if(parsed.recognized){
-        note("Delivered! Total is based on your Python output.");
+      function renderInputs() {
+        const grid = $("inputGrid");
+        grid.replaceChildren();
+        challenges[current].inputs.forEach((item, i) => {
+          const wrap = document.createElement("div");
+          wrap.className = "input-field";
+          const label = document.createElement("label");
+          label.htmlFor = `userInput${i}`;
+          label.textContent = item.label;
+          const input = document.createElement("input");
+          input.id = `userInput${i}`;
+          input.type = item.type;
+          input.step = "any";
+          input.value = item.value;
+          wrap.append(label, input);
+          grid.append(wrap);
+        });
       }
-    },2600);
-  }
-}
+      function getValues() {
+        return challenges[current].inputs.map((_, i) =>
+          $(`userInput${i}`).value.trim(),
+        );
+      }
+      function render() {
+        clearAnimation();
+        if (current < 0) {
+          show("intro");
+          return;
+        }
+        if (current >= 5) {
+          showFinish();
+          return;
+        }
+        const c = challenges[current];
+        $("counter").textContent = `Challenge ${current + 1} of 5`;
+        $("topic").textContent = c.topic;
+        $("challengeTitle").textContent = c.title;
+        $("task").textContent = c.task;
+        $("conceptTag").textContent = c.concept;
+        $("editor").value = savedCode[current] ?? c.starter;
+        $("output").textContent = "Output will appear here...";
+        $("feedback").textContent = "";
+        $("feedback").className = "feedback";
+        $("nextChallenge").disabled = !completed.has(current);
+        $("nextChallenge").textContent =
+          current === 4 ? "Finish Challenges" : "Next Challenge";
+        renderInputs();
+        show("challenge");
+        buildVisual();
+      }
+      function resetCode() {
+        if (running || current < 0 || current >= 5) return;
+        $("editor").value = challenges[current].starter;
+        savedCode[current] = $("editor").value;
+        delete lastRun[current];
+        $("output").textContent = "Output will appear here...";
+        $("feedback").textContent = "";
+        $("feedback").className = "feedback";
+        clearAnimation();
+        buildVisual();
+      }
+      function animateExecution(record) {
+        clearAnimation();
+        buildVisual();
+        if (!record) {
+          note("Run your code first.");
+          return;
+        }
+        const index = current;
+        const v = record.values;
+        const text = String(record.output).trim();
+        if (record.error) {
+          result("Code error");
+          note("The program could not finish.");
+          return;
+        }
+        if (index === 0) {
+          $("experienceMetric").textContent = v[0] + " years";
+          note("Reading your route selection...");
+          schedule(() => {
+            result(text || "No output");
+            const positions = {
+              "Beginner Route": "22%",
+              "Intermediate Route": "48%",
+              "Advanced Route": "74%",
+            };
+            if (positions[text]) {
+              $("climber").style.left = positions[text];
+              $("climber").classList.add("move");
+              note("Your code selected: " + text);
+            } else note("Your code did not print a recognized route.");
+          }, 700);
+        }
+        if (index === 1) {
+          $("weatherMetric").textContent = v[0];
+          note("Checking your weather decision...");
+          schedule(() => {
+            result(text || "No output");
+            const sky = $("weatherSky");
+            const effect = $("weatherEffect");
+            if (text === "Outdoor climbing") {
+              $("weatherSun").style.opacity = "1";
+              $("weatherClimber").classList.add("move");
+              note("Your code chose outdoor climbing.");
+            } else if (text === "Indoor climbing") {
+              sky.classList.add("rainy");
+              effect.textContent = "🌧️";
+              effect.classList.add("visible");
+              note("Your code chose indoor climbing.");
+            } else if (text === "Climb cancelled") {
+              sky.classList.add("stormy");
+              effect.textContent = "⛈️";
+              effect.classList.add("visible");
+              note("Your code cancelled the climb.");
+            } else note("Your code did not print a recognized activity.");
+          }, 700);
+        }
+        if (index === 2) {
+          $("pointsMetric").textContent = v[0];
+          note("Checking the training reward...");
+          schedule(() => {
+            result(text || "No output");
+            const ids = {
+              Bronze: "bronzeCard",
+              Silver: "silverCard",
+              Gold: "goldCard",
+            };
+            if (ids[text]) {
+              $(ids[text]).classList.add("active");
+              note("Your code awarded: " + text);
+            } else note("Your code did not print a recognized reward.");
+          }, 700);
+        }
+        if (index === 3) {
+          $("ageMetric").textContent = v[0];
+          $("permissionMetric").textContent = v[1];
+          note("Checking your entry decision...");
+          schedule(() => {
+            result(text || "No output");
+            if (text === "Entry allowed") {
+              $("campDoor").classList.add("open");
+              note("Your code opened the camp gate.");
+            } else if (text === "Entry denied") {
+              note("Your code kept the gate closed.");
+            } else note("Your code did not print a recognized decision.");
+          }, 700);
+        }
+        if (index === 4) {
+          $("memberMetric").textContent = v[0];
+          $("couponMetric").textContent = v[1];
+          note("Checking the water station...");
+          schedule(() => {
+            result(text || "No output");
+            if (text === "Free water") {
+              $("dispenser").classList.add("active");
+              $("stationStatus").textContent = "Free bottle!";
+              note("Your code gave a free water bottle.");
+            } else if (text === "Pay for water") {
+              $("stationStatus").textContent = "Payment required";
+              note("Your code requires payment.");
+            } else note("Your code did not print a recognized decision.");
+          }, 700);
+        }
+      }
+      function replayAnimation() {
+        if (running || current < 0 || current >= 5) return;
+        const record = lastRun[current];
+        if (!record) {
+          buildVisual();
+          note("Run your code first.");
+          return;
+        }
+        animateExecution(record);
+      }
 
-function replayAnimation(){
-  if(running||current<0||current>=5)return;
-
-  const record=lastRun[current];
-
-  if(!record){
-    buildVisual();
-    note("Run your code first.");
-    return;
-  }
-
-  animateExecution(record);
-}
-
-/*
-  Pyodide executes the student's real Python code
-  inside a Web Worker.
-*/
-const workerSource=`
+      const workerSource = `
 let pyodide=null;
-
 async function getPython(){
   if(!pyodide){
-    importScripts(
-      "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"
-    );
+    importScripts("https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js");
     pyodide=await loadPyodide();
   }
   return pyodide;
 }
-
 self.onmessage=async event=>{
   const {id,code,values}=event.data;
-
   try{
     const py=await getPython();
-
-    py.globals.set(
-      "_challenge_payload",
-      JSON.stringify({code,values})
-    );
-
+    py.globals.set("_challenge_payload",JSON.stringify({code,values}));
     let output;
-
     try{
       output=await py.runPythonAsync(\`
 import json
@@ -1309,11 +1166,7 @@ def custom_input(prompt=""):
 
 custom_builtins=dict(vars(builtins))
 custom_builtins["input"]=custom_input
-
-scope={
-    "__name__":"__main__",
-    "__builtins__":custom_builtins
-}
+scope={"__name__":"__main__","__builtins__":custom_builtins}
 
 try:
     with contextlib.redirect_stdout(capture):
@@ -1327,365 +1180,241 @@ capture.getvalue()
     }finally{
       py.globals.delete("_challenge_payload");
     }
-
-    self.postMessage({
-      id,
-      success:true,
-      output:String(output)
-    });
-
+    self.postMessage({id,success:true,output:String(output)});
   }catch(error){
-    self.postMessage({
-      id,
-      success:false,
-      error:String(error.message||error)
-    });
+    self.postMessage({id,success:false,error:String(error.message||error)});
   }
 };
 `;
 
-function createWorker(){
-  const blob=new Blob(
-    [workerSource],
-    {type:"text/javascript"}
-  );
-  const url=URL.createObjectURL(blob);
-  const instance=new Worker(url);
-  URL.revokeObjectURL(url);
-  return instance;
-}
-
-function ensureWorker(){
-  if(worker)return worker;
-
-  worker=createWorker();
-
-  worker.onmessage=event=>{
-    const {id,success,output,error}=event.data;
-    const pending=requests.get(id);
-
-    if(!pending)return;
-
-    clearTimeout(pending.timeout);
-    requests.delete(id);
-
-    if(success)pending.resolve(output);
-    else pending.reject(new Error(error));
-  };
-
-  worker.onerror=event=>{
-    resetWorker(
-      new Error(event.message||"Python worker failed.")
-    );
-  };
-
-  return worker;
-}
-
-function resetWorker(error){
-  if(worker){
-    worker.terminate();
-    worker=null;
-  }
-
-  for(const pending of requests.values()){
-    clearTimeout(pending.timeout);
-    pending.reject(error);
-  }
-
-  requests.clear();
-}
-
-function executePython(code,values){
-  return new Promise((resolve,reject)=>{
-    let instance;
-
-    try{
-      instance=ensureWorker();
-    }catch(error){
-      reject(error);
-      return;
-    }
-
-    const id=++requestId;
-
-    const timeout=setTimeout(()=>{
-      resetWorker(
-        new Error("Python took too long. Check for an infinite loop.")
-      );
-    },30000);
-
-    requests.set(id,{resolve,reject,timeout});
-    instance.postMessage({id,code,values});
-  });
-}
-
-function hasIfElse(code){
-  const lines=code.split(/\r?\n/).map(s=>s.trim());
-
-  const hasIf=lines.some(
-    line=>/^if\s+.+:\s*(#.*)?$/.test(line)
-  );
-
-  const hasElse=lines.some(
-    line=>/^else\s*:\s*(#.*)?$/.test(line)
-  );
-
-  return hasIf&&hasElse;
-}
-
-function outputMatches(actual,expected){
-  const text=String(actual).trim();
-
-  if(typeof expected==="number"){
-    const cleaned=text.replace(/^₹/,"");
-
-    if(cleaned===""||/\s/.test(cleaned))return false;
-
-    const value=Number(cleaned);
-
-    return Number.isFinite(value)&&
-      Math.abs(value-expected)<0.000001;
-  }
-
-  return text===String(expected);
-}
-
-async function runCode(){
-  if(running||current<0||current>=5)return;
-
-  const index=current;
-  const c=challenges[index];
-  const code=$("editor").value;
-  const values=getValues();
-
-  savedCode[index]=code;
-
-  if(values.some(v=>v==="")){
-    $("feedback").textContent="Enter the test input.";
-    $("feedback").className="feedback bad";
-    return;
-  }
-
-  if(values.some(v=>!Number.isFinite(Number(v)))){
-    $("feedback").textContent="Enter a valid number.";
-    $("feedback").className="feedback bad";
-    return;
-  }
-
-  if(!hasIfElse(code)){
-    $("feedback").textContent=
-      "Use both if and else in your code.";
-    $("feedback").className="feedback bad";
-    return;
-  }
-
-  running=true;
-  $("runBtn").disabled=true;
-  $("runBtn").textContent="Running...";
-  $("feedback").textContent="Running Python...";
-  $("feedback").className="feedback";
-
-  clearAnimation();
-  buildVisual();
-  note("Executing your code...");
-
-  try{
-    const output=await executePython(code,values);
-
-    if(current!==index)return;
-
-    const record={
-      values:[...values],
-      output,
-      error:false
-    };
-
-    lastRun[index]=record;
-    $("output").textContent=output||"(No output)";
-
-    animateExecution(record);
-
-    const visiblePass=outputMatches(
-      output,
-      c.expected(values)
-    );
-
-    let allPass=visiblePass;
-
-    if(allPass){
-      for(const testValues of c.tests){
-        const testOutput=await executePython(
-          code,testValues
-        );
-
-        if(!outputMatches(
-          testOutput,
-          c.expected(testValues)
-        )){
-          allPass=false;
-          break;
-        }
+      function createWorker() {
+        const blob = new Blob([workerSource], { type: "text/javascript" });
+        const url = URL.createObjectURL(blob);
+        const instance = new Worker(url);
+        URL.revokeObjectURL(url);
+        return instance;
       }
-    }
-
-    if(current!==index)return;
-
-    if(allPass){
-      const firstSolve=!completed.has(index);
-      completed.add(index);
-
-      $("feedback").textContent=
-        "Correct! Your if-else works for different inputs.";
-      $("feedback").className="feedback good";
-      $("nextChallenge").disabled=false;
-
-      if(firstSolve&&typeof confetti==="function"){
-        confetti({
-          particleCount:85,
-          spread:70,
-          origin:{y:.65},
-          colors:[
-            "#5E48C4",
-            "#FFD071",
-            "#7B6ED4",
-            "#28B5CB"
-          ]
+      function ensureWorker() {
+        if (worker) return worker;
+        worker = createWorker();
+        worker.onmessage = (event) => {
+          const { id, success, output, error } = event.data;
+          const pending = requests.get(id);
+          if (!pending) return;
+          clearTimeout(pending.timeout);
+          requests.delete(id);
+          if (success) pending.resolve(output);
+          else pending.reject(new Error(error));
+        };
+        worker.onerror = (event) => {
+          resetWorker(new Error(event.message || "Python worker failed."));
+        };
+        return worker;
+      }
+      function resetWorker(error) {
+        if (worker) {
+          worker.terminate();
+          worker = null;
+        }
+        for (const pending of requests.values()) {
+          clearTimeout(pending.timeout);
+          pending.reject(error);
+        }
+        requests.clear();
+      }
+      function executePython(code, values) {
+        return new Promise((resolve, reject) => {
+          let instance;
+          try {
+            instance = ensureWorker();
+          } catch (error) {
+            reject(error);
+            return;
+          }
+          const id = ++requestId;
+          const timeout = setTimeout(() => {
+            resetWorker(
+              new Error("Python took too long. Check for an infinite loop."),
+            );
+          }, 30000);
+          requests.set(id, { resolve, reject, timeout });
+          instance.postMessage({ id, code, values });
         });
       }
-    }else{
-      $("feedback").textContent=visiblePass
-        ?"This input works, but another test case failed."
-        :"Your output is incorrect. Check your if-else logic.";
-      $("feedback").className="feedback bad";
-    }
+      function hasRequiredStructure(code, operator) {
+        const lines = code.split(/\r?\n/).map((s) => s.trim());
+        const hasIf = lines.some((s) => /^if\s+.+:/.test(s));
+        const hasElse = lines.some((s) => /^else\s*:/.test(s));
+        if (operator === "elif") {
+          return hasIf && hasElse && lines.some((s) => /^elif\s+.+:/.test(s));
+        }
+        return hasIf && hasElse && new RegExp(`\\b${operator}\\b`).test(code);
+      }
+      function outputMatches(actual, expected) {
+        return String(actual).trim() === String(expected).trim();
+      }
+      async function runCode() {
+        if (running || current < 0 || current >= 5) return;
+        const index = current;
+        const c = challenges[index];
+        const code = $("editor").value;
+        const values = getValues();
+        savedCode[index] = code;
 
-    updateNav();
+        if (values.some((v) => v === "")) {
+          $("feedback").textContent = "Enter all test inputs.";
+          $("feedback").className = "feedback bad";
+          return;
+        }
+        if (!hasRequiredStructure(code, c.operator)) {
+          $("feedback").textContent =
+            c.operator === "elif"
+              ? "Use if, elif and else in your code."
+              : `Use if, else and the '${c.operator}' operator.`;
+          $("feedback").className = "feedback bad";
+          return;
+        }
 
-  }catch(error){
-    if(current===index){
-      const message=String(error.message||error);
+        running = true;
+        $("runBtn").disabled = true;
+        $("runBtn").textContent = "Running...";
+        $("feedback").textContent = "Running Python...";
+        $("feedback").className = "feedback";
+        clearAnimation();
+        buildVisual();
+        note("Executing your code...");
 
-      $("output").textContent=message;
-      lastRun[index]={
-        values:[...values],
-        output:message,
-        error:true
-      };
+        try {
+          const output = await executePython(code, values);
+          if (current !== index) return;
+          const record = { values: [...values], output, error: false };
+          lastRun[index] = record;
+          $("output").textContent = output || "(No output)";
+          animateExecution(record);
 
-      animateExecution(lastRun[index]);
+          const visiblePass = outputMatches(output, c.expected(values));
+          let allPass = visiblePass;
 
-      $("feedback").textContent=
-        "Python could not complete the program.";
-      $("feedback").className="feedback bad";
-    }
-  }finally{
-    running=false;
-    $("runBtn").disabled=false;
-    $("runBtn").innerHTML=
-      '<i class="fa-solid fa-play"></i> Run Code';
-  }
-}
-
-function nextChallenge(){
-  if(running||current<0||!completed.has(current))return;
-
-  savedCode[current]=$("editor").value;
-  current++;
-  render();
-}
-
-function previous(){
-  if(running||current<0)return;
-
-  if(current<5){
-    savedCode[current]=$("editor").value;
-  }
-
-  current--;
-  render();
-}
-
-function forward(){
-  if(current===-1){
-    start();
-    return;
-  }
-
-  if(current>=5)return;
-
-  nextChallenge();
-}
-
-function updateNav(){
-  $("prevBtn").disabled=current<0;
-
-  $("navNext").disabled=
-    current>=5||
-    (current>=0&&!completed.has(current));
-
-  $("navInfo").textContent=
-    current<0
-      ?"Python If-Else"
-      :current>=5
-        ?"Completed"
-        :`Challenge ${current+1} / 5`;
-
-  $("progress").textContent=completed.size;
-}
-
-function showFinish(){
-  clearAnimation();
-  current=5;
-  $("finalCount").textContent=`${completed.size} / 5`;
-  show("finish");
-
-  if(typeof confetti==="function"){
-    confetti({
-      particleCount:130,
-      spread:80
-    });
-  }
-}
-
-function restart(){
-  clearAnimation();
-  current=-1;
-  completed.clear();
-  savedCode={};
-  lastRun={};
-  show("intro");
-}
-
-$("editor").addEventListener("input",()=>{
-  if(current>=0&&current<5){
-    savedCode[current]=$("editor").value;
-  }
-});
-
-$("editor").addEventListener("keydown",e=>{
-  if(e.key==="Tab"){
-    e.preventDefault();
-
-    e.target.setRangeText(
-      "    ",
-      e.target.selectionStart,
-      e.target.selectionEnd,
-      "end"
-    );
-  }
-});
-
-document.addEventListener("keydown",e=>{
-  if(["TEXTAREA","INPUT","SELECT"].includes(e.target.tagName)){
-    return;
-  }
-
-  if(e.key==="ArrowLeft")previous();
-  if(e.key==="ArrowRight")forward();
-});
-
-updateNav();
-</script>
-</body>
+          if (allPass) {
+            for (const test of c.tests) {
+              const testOutput = await executePython(code, test);
+              if (!outputMatches(testOutput, c.expected(test))) {
+                allPass = false;
+                break;
+              }
+            }
+          }
+          if (current !== index) return;
+          if (allPass) {
+            const firstSolve = !completed.has(index);
+            completed.add(index);
+            $("feedback").textContent =
+              "Correct! Your code works for different inputs.";
+            $("feedback").className = "feedback good";
+            $("nextChallenge").disabled = false;
+            if (firstSolve && typeof confetti === "function") {
+              confetti({
+                particleCount: 85,
+                spread: 70,
+                origin: { y: 0.65 },
+                colors: ["#5E48C4", "#FFD071", "#7B6ED4", "#28B5CB"],
+              });
+            }
+          } else {
+            $("feedback").textContent = visiblePass
+              ? "This input works, but another test case failed."
+              : "Your output is incorrect. Check your conditions.";
+            $("feedback").className = "feedback bad";
+          }
+          updateNav();
+        } catch (error) {
+          if (current === index) {
+            const message = String(error.message || error);
+            $("output").textContent = message;
+            lastRun[index] = {
+              values: [...values],
+              output: message,
+              error: true,
+            };
+            animateExecution(lastRun[index]);
+            $("feedback").textContent =
+              "Python could not complete the program.";
+            $("feedback").className = "feedback bad";
+          }
+        } finally {
+          running = false;
+          $("runBtn").disabled = false;
+          $("runBtn").textContent = "▶ Run Code";
+        }
+      }
+      function nextChallenge() {
+        if (running || current < 0 || !completed.has(current)) return;
+        savedCode[current] = $("editor").value;
+        current++;
+        render();
+      }
+      function previous() {
+        if (running || current < 0) return;
+        if (current < 5) savedCode[current] = $("editor").value;
+        current--;
+        render();
+      }
+      function forward() {
+        if (current === -1) {
+          start();
+          return;
+        }
+        if (current >= 5) return;
+        nextChallenge();
+      }
+      function updateNav() {
+        $("prevBtn").disabled = current < 0;
+        $("navNext").disabled =
+          current >= 5 || (current >= 0 && !completed.has(current));
+        $("navInfo").textContent =
+          current < 0
+            ? "Python Decisions"
+            : current >= 5
+              ? "Completed"
+              : `Challenge ${current + 1} / 5`;
+        $("progress").textContent = completed.size;
+      }
+      function showFinish() {
+        clearAnimation();
+        current = 5;
+        $("finalCount").textContent = `${completed.size} / 5`;
+        show("finish");
+        if (typeof confetti === "function")
+          confetti({ particleCount: 130, spread: 80 });
+      }
+      function restart() {
+        clearAnimation();
+        current = -1;
+        completed.clear();
+        savedCode = {};
+        lastRun = {};
+        show("intro");
+      }
+      $("editor").addEventListener("input", () => {
+        if (current >= 0 && current < 5) savedCode[current] = $("editor").value;
+      });
+      $("editor").addEventListener("keydown", (e) => {
+        if (e.key === "Tab") {
+          e.preventDefault();
+          e.target.setRangeText(
+            "    ",
+            e.target.selectionStart,
+            e.target.selectionEnd,
+            "end",
+          );
+        }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (["TEXTAREA", "INPUT", "SELECT"].includes(e.target.tagName)) return;
+        if (e.key === "ArrowLeft") previous();
+        if (e.key === "ArrowRight") forward();
+      });
+      updateNav();
+    </script>
+  </body>
 </html>
